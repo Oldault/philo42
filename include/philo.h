@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:44:38 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/05 12:09:59 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:43:47 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,21 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_phil_eat;
-	int				amount_eaten;
+	int				amount_to_eat;
 	int				died_flag;
 	int				all_ate_flag;
+	long long		timestamp;
 	t_philo			philos[200];
+	pthread_mutex_t	forks[200];
+	pthread_mutex_t	meal_check;
+	pthread_mutex_t	writing;
 }					t_data;
 
 // --- UTILS --- //
 int					ft_atoi(const char *str);
 int					found_alph(char **arr);
+
+// --- INIT ---- //
+void				*init_data(t_data *data, int ac, char **av);
 
 #endif
