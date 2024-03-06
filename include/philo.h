@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:44:38 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/06 10:43:47 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:40:23 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
 # include <time.h>
 # include <unistd.h>
 
@@ -54,8 +55,15 @@ typedef struct s_data
 // --- UTILS --- //
 int					ft_atoi(const char *str);
 int					found_alph(char **arr);
+long long			timestamp(void);
+void		ft_sleep(t_data *data, long long time);
 
 // --- INIT ---- //
 void				*init_data(t_data *data, int ac, char **av);
+
+// --- PRINT --- //
+void				error(char *str);
+void				log_action(t_data *data, char *emoji, int phil_id,
+						char *str);
 
 #endif

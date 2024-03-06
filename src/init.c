@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:42:48 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/06 11:48:18 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:31:29 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static int	init_philos(t_data *data)
 void	*init_data(t_data *data, int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
-		return (write(2, "Invalid Argument Amount 🙅😬🤷\n", 29), NULL);
+		return (write(2, "Invalid Argument Amount 🙅\n", 29), NULL);
 	if (found_alph(av + 1))
-		return (write(2, "Invalid Argument Given 🙈😩😑\n", 28), NULL);
+		return (write(2, "Invalid Argument Given 🙈\n", 28), NULL);
 	data->phil_num = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);

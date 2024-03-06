@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_func.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:43:58 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/04 10:41:07 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:37:19 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,30 @@ int	found_alph(char **arr)
 		}
 	}
 	return (0);
+}
+
+long long	timestamp(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}
+
+long long	time_diff(long long past, long long pres)
+{
+	return (pres - past);
+}
+
+void		ft_sleep(t_data *data, long long time)
+{
+	long long i;
+
+	i = timestamp();
+	while (!(data->died_flag))
+	{
+		if (time_diff(i, timestamp()) >= time)
+			break ;
+		usleep(50);
+	}
 }
