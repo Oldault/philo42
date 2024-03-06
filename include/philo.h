@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:44:38 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/06 17:40:23 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:57:05 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef struct s_data
 int					ft_atoi(const char *str);
 int					found_alph(char **arr);
 long long			timestamp(void);
-void		ft_sleep(t_data *data, long long time);
+void				ft_sleep(t_data *data, long long time);
+long long	time_diff(long long past, long long pres);
 
 // --- INIT ---- //
 void				*init_data(t_data *data, int ac, char **av);
@@ -65,5 +66,6 @@ void				*init_data(t_data *data, int ac, char **av);
 void				error(char *str);
 void				log_action(t_data *data, char *emoji, int phil_id,
 						char *str);
+void				print_death(t_data *data, int phil_id);
 
 #endif

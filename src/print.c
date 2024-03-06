@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:34:02 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/06 17:34:41 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:00:27 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	log_action(t_data *data, char *emoji ,int phil_id, char *str)
 	if (!(data->died_flag))
 	{
 		if (emoji)
-			printf("[%s]\t", emoji);
-		printf("%lli\t", timestamp() - data->timestamp);
-		printf("%i ", phil_id + 1);
-		printf("%s\n", str);
+			printf("\033[35;1m[%s]\033[0m\t", emoji);
+		printf("\033[34m%lli\033[0m\t", timestamp() - data->timestamp);
+		printf("\033[32;1;4m%i\033[0m ", phil_id + 1);
+		printf("\033[33;3m%s\033[0m\n", str);
 	}
 	pthread_mutex_unlock(&(data->writing));
 }
@@ -34,4 +34,18 @@ void	error(char *str)
 	while (str[++i])
 		write(2, &str[i], 1);
 	write(2, "\n", 2);
+}
+
+void	print_death(t_data *data, int phil_id)
+{
+	pthread_mutex_lock(&(data->writing));
+	printf("\n\x1b[30;41;1;4m[ 💀🪦      Philosopher %d Died      🪦 💀 ]\x1b[0m\n", phil_id + 1);
+	printf("\x1b[31;49;1m░ ▒░▓  ░░▒▓███▀▒░ ░▒ ▒  ░░▒▒ ▓░▒░▒░ ▒░▒░▒░\n");
+	printf("░ ░ ▒  ░▒░▒   ░   ░  ▒   ░░▒ ▒ ░ ▒  ░ ▒ ▒░\n");
+	printf("  ░ ░    ░    ░ ░        ░ ░ ░ ░ ░░ ░ ░ ▒ \n");
+	printf("    ░  ░ ░      ░ ░        ░ ░        ░ ░ \n");
+	printf("              ░ ░        ░                \n\n");
+	// printf("▓▒░");
+	printf("\x1b[0m\n");
+	pthread_mutex_unlock(&(data->writing));
 }
