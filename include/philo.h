@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:44:38 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 17:16:25 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:58:38 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 // -- STRUCTS -- //
-struct s_data;
+struct	s_data;
 
 typedef struct s_philo
 {
@@ -70,6 +70,10 @@ void				*init_data(t_data *data, int ac, char **av);
 // -- ACTIONS -- //
 void				try_to_eat(t_philo *philo);
 void				*routines(void *param_philo);
+
+// --- EXIT ---- //
+void				exit_if_needed(t_data *data, t_philo *philo);
+void				join_threads(t_data *data, t_philo *philos);
 
 // --- PRINT --- //
 void				error(char *str);
