@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:43:58 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/06 17:37:19 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:22:18 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	ft_atoi(const char *str)
 
 int	found_alph(char **arr)
 {
-	int i;
-	int j;
-	char c;
-	
+	int		i;
+	int		j;
+	char	c;
+
 	i = -1;
 	while (arr[++i])
 	{
@@ -72,9 +72,9 @@ long long	time_diff(long long past, long long pres)
 	return (pres - past);
 }
 
-void		ft_sleep(t_data *data, long long time)
+void	ft_sleep(t_data *data, long long time)
 {
-	long long i;
+	long long	i;
 
 	i = timestamp();
 	while (!(data->died_flag))

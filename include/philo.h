@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:44:38 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/06 18:57:05 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:22:41 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 // -- STRUCTS -- //
-struct s_data;
+struct	s_data;
 
 typedef struct s_philo
 {
@@ -57,15 +57,20 @@ int					ft_atoi(const char *str);
 int					found_alph(char **arr);
 long long			timestamp(void);
 void				ft_sleep(t_data *data, long long time);
-long long	time_diff(long long past, long long pres);
+long long			time_diff(long long past, long long pres);
 
 // --- INIT ---- //
 void				*init_data(t_data *data, int ac, char **av);
+
+// -- ACTIONS -- //
+void				try_to_eat(t_philo *philo);
+void				*routines(void *param_philo);
 
 // --- PRINT --- //
 void				error(char *str);
 void				log_action(t_data *data, char *emoji, int phil_id,
 						char *str);
 void				print_death(t_data *data, int phil_id);
+void				print_header(void);
 
 #endif
