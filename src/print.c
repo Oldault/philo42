@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:34:02 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 10:23:00 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:31:42 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	log_action(t_data *data, char *emoji, int phil_id, char *str)
 {
 	pthread_mutex_lock(&(data->writing));
-	if (!(data->died_flag))
+	if (!(someone_died(data)) && !(all_ate_flag(data)))
 	{
 		if (emoji)
 			printf("\033[35;1m[%s]\033[0m\t", emoji);

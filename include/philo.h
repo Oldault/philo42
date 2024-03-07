@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:44:38 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 10:22:41 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:16:25 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 // -- STRUCTS -- //
-struct	s_data;
+struct s_data;
 
 typedef struct s_philo
 {
@@ -41,6 +41,7 @@ typedef struct s_data
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
+	int				time_to_think;
 	int				num_phil_eat;
 	int				amount_to_eat;
 	int				died_flag;
@@ -50,6 +51,8 @@ typedef struct s_data
 	pthread_mutex_t	forks[200];
 	pthread_mutex_t	meal_check;
 	pthread_mutex_t	writing;
+	pthread_mutex_t	all_ate;
+	pthread_mutex_t	death_flag;
 }					t_data;
 
 // --- UTILS --- //
@@ -58,6 +61,8 @@ int					found_alph(char **arr);
 long long			timestamp(void);
 void				ft_sleep(t_data *data, long long time);
 long long			time_diff(long long past, long long pres);
+int					all_ate_flag(t_data *data);
+int					someone_died(t_data *data);
 
 // --- INIT ---- //
 void				*init_data(t_data *data, int ac, char **av);

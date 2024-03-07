@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:42:48 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 10:36:26 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:25:49 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ void	*init_data(t_data *data, int ac, char **av)
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
+	data->time_to_think = time_diff(data->time_to_sleep, data->time_to_eat) + 1;
 	data->num_phil_eat = INT_MAX;
 	if (ac == 6)
 	{
 		if (ft_atoi(av[5]) <= 0)
 			return (error("No meals to be eaten"), NULL);
-		data->num_phil_eat = ft_atoi(av[5]) - 1;
+		data->num_phil_eat = ft_atoi(av[5]);
 	}
-	if (data->phil_num < 2 || data->phil_num > 200)
+	if (data->phil_num < 1 || data->phil_num > 200)
 	{
 		error("No table available for that amount of Philosophers");
 		return (NULL);

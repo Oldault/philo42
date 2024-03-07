@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:43:58 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 10:22:18 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:18:34 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,34 @@ void	ft_sleep(t_data *data, long long time)
 	long long	i;
 
 	i = timestamp();
-	while (!(data->died_flag))
+	while (!(someone_died(data)))
 	{
 		if (time_diff(i, timestamp()) >= time)
 			break ;
 		usleep(50);
 	}
+}
+
+int	all_ate_flag(t_data *data)
+{
+	pthread_mutex_lock(&(data->all_ate));
+	if (data->all_ate_flag)
+	{
+		pthread_mutex_unlock(&(data->all_ate));
+		return (1);
+	}
+	pthread_mutex_unlock(&(data->all_ate));
+	return (0);
+}
+
+int	someone_died(t_data *data)
+{
+	pthread_mutex_lock(&(data->death_flag));
+	if (data->died_flag)
+	{
+		pthread_mutex_unlock(&(data->death_flag));
+		return (1);
+	}
+	pthread_mutex_unlock(&(data->death_flag));
+	return (0);
 }
