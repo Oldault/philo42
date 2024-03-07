@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:17:40 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 10:17:54 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:02:32 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	try_to_eat(t_philo *philo)
 	pthread_mutex_lock(&(data->meal_check));
 	log_action(data, " 🍝 ", philo->id, "is eating");
 	philo->prev_meal_time = timestamp();
+	(philo->x_ate)++;
 	pthread_mutex_unlock(&(data->meal_check));
 	ft_sleep(data, data->time_to_eat);
-	(philo->x_ate)++;
 	pthread_mutex_unlock(&(data->forks[philo->l_fork_id]));
 	pthread_mutex_unlock(&(data->forks[philo->r_fork_id]));
 }

@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:34:03 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 10:17:32 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:05:15 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	join_threads(t_data *data, t_philo *philos)
 	while (++i < data->phil_num)
 		pthread_mutex_destroy(&(data->forks[i]));
 	pthread_mutex_destroy(&(data->writing));
+	pthread_mutex_destroy(&(data->meal_check));
 }
 
 void	check_casualties(t_data *data, t_philo *philo)
@@ -64,9 +65,9 @@ int	start_threads(t_data *data)
 	data->timestamp = timestamp();
 	while (++i < data->phil_num)
 	{
+		philos[i].prev_meal_time = timestamp();
 		if (pthread_create(&(philos[i].th_id), NULL, routines, &(philos[i])))
 			return (1);
-		philos[i].prev_meal_time = timestamp();
 	}
 	check_casualties(data, philos);
 	join_threads(data, philos);
