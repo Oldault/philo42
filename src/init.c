@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:42:48 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 17:57:34 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:55:57 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static int	init_philos(t_data *data)
 	{
 		data->philos[i].id = i;
 		data->philos[i].x_ate = 0;
-		data->philos[i].l_fork_id = i;
-		data->philos[i].r_fork_id = (i + 1) % data->phil_num;
 		data->philos[i].prev_meal_time = 0;
 		data->philos[i].data = data;
+		data->philos[i].l_fork_id = i;
+		data->philos[i].r_fork_id = (i + 1) % data->phil_num;
 	}
 	return (0);
 }

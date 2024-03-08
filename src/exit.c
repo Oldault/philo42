@@ -6,7 +6,7 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:17:40 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 17:52:35 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:23:22 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ void	exit_if_needed(t_data *data, t_philo *philo)
 		if (someone_died(data) || all_ate_flag(data))
 			break ;
 		i = 0;
+		pthread_mutex_lock(&(data->meal_check));
 		while (i < data->phil_num && philo[i].x_ate >= data->num_phil_eat)
 			i++;
+		pthread_mutex_unlock(&(data->meal_check));
 		if (i == data->phil_num)
 		{
 			pthread_mutex_lock(&(data->all_ate));

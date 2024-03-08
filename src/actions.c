@@ -6,18 +6,23 @@
 /*   By: svolodin <svolodin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:17:40 by svolodin          #+#    #+#             */
-/*   Updated: 2024/03/07 17:16:50 by svolodin         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:39:03 by svolodin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	try_to_eat(t_philo *philo)
+void	take_forks(t_data *data, t_philo *philo)
 {
-	t_data	*data;
-
-	data = philo->data;
-	if (philo->id % 2 == 0)
+	if (philo->r_fork_id == philo->l_fork_id)
+	{
+		pthread_mutex_lock(&(data->forks[philo->r_fork_id]));
+		log_action(data, " 🍴➡️", philo->id, "took the fork on his right");
+		pthread_mutex_unlock(&(data->forks[philo->r_fork_id]));
+		while (!(someone_died(data)))
+			continue ;
+	}
+	else if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&(data->forks[philo->r_fork_id]));
 		log_action(data, " 🍴➡️", philo->id, "took the fork on his right");
@@ -31,14 +36,25 @@ void	try_to_eat(t_philo *philo)
 		pthread_mutex_lock(&(data->forks[philo->r_fork_id]));
 		log_action(data, " 🍴➡️", philo->id, "took the fork on his right");
 	}
+}
+
+void	try_to_eat(t_philo *philo)
+{
+	t_data	*data;
+
+	data = philo->data;
+	take_forks(data, philo);
 	pthread_mutex_lock(&(data->meal_check));
 	log_action(data, " 🍝 ", philo->id, "is eating");
 	philo->prev_meal_time = timestamp();
 	(philo->x_ate)++;
 	pthread_mutex_unlock(&(data->meal_check));
 	ft_sleep(data, data->time_to_eat);
-	pthread_mutex_unlock(&(data->forks[philo->l_fork_id]));
-	pthread_mutex_unlock(&(data->forks[philo->r_fork_id]));
+	if (philo->r_fork_id != philo->l_fork_id)
+	{
+		pthread_mutex_unlock(&(data->forks[philo->l_fork_id]));
+		pthread_mutex_unlock(&(data->forks[philo->r_fork_id]));
+	}
 }
 
 void	*routines(void *param_philo)
